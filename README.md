@@ -1,25 +1,39 @@
-# LLM Data Assistant (Fullstack)
+# LLM Data Assistant — Fullstack (FastAPI + React)
 
-## Overview
-LLM Data Assistant is a full-stack application that allows users to [briefly describe functionality].  
-It demonstrates integration of [backend technology] and [frontend technology], with a focus on clean code, modular architecture, and practical AI/data applications.
+This repo provides a fullstack example:
+- FastAPI backend (file ingest, projects, auth, chat)
+- Chroma local vectorstore per project
+- React frontend (upload, create projects, chat)
+- Tests + GitHub Actions CI
+- Dockerfile + docker-compose for local running
 
-## Tech Stack
-- Backend: Python, Flask/FastAPI (or your backend framework)
-- Frontend: React
-- Database: [e.g., SQLite, PostgreSQL]
-- Other: [list any other libraries]
+## Quick start (local)
 
-## Features
-- Feature 1: [e.g., Query data using LLM]
-- Feature 2: [e.g., View analytics in dashboard]
-- Feature 3: [e.g., User authentication]
+1. Copy repo and set env:
+   ```bash
+   export OPENAI_API_KEY="sk-..."
+   export SECRET_KEY="your-secret"
+   ```
 
-## Setup Instructions
-
-### Backend
-1. Navigate to the backend folder:
+2. Start backend:
    ```bash
    cd backend
+   python -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   uvicorn app.main:app --reload --port 8000
+   ```
 
+3. Start frontend:
+   ```bash
+   cd frontend
+   npm install
+   npm start
+   ```
 
+4. Register in frontend, create a project, upload `sample_data.csv`, then ask questions.
+
+## Notes
+- The app uses OpenAI; set OPENAI_API_KEY before running.
+- Replace auth flow with production-ready OAuth2 when moving to production.
+- For CI without calling OpenAI, mock OpenAI calls in tests.
